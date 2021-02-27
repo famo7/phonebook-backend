@@ -52,7 +52,7 @@ app.post("/api/persons", (req, res) => {
   let personExists = persons.find((p) => p.number === person.number);
 
   if (!person.name || !person.number) {
-    return response.status(400).json({
+    return res.status(400).json({
       error: "content missing",
     });
   } else if (personExists) {
