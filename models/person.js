@@ -1,15 +1,15 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 
 mongoose.set('strictQuery', false);
 
 const url = process.env.MONGODB_URI;
 
-console.log('connecting to', url);
-
 mongoose
   .connect(url)
 
-  .then((result) => {
+  .then(() => {
     console.log('connected to MongoDB');
   })
   .catch((error) => {
@@ -27,7 +27,7 @@ const phonebookSchema = new mongoose.Schema({
     minLength: 8,
     required: true,
     validate: {
-      validator: function (v) {
+      validator(v) {
         return /^(?:\d{2,3}-\d+){1,}$/.test(v);
       },
       message: (props) => `${props.value} is not a valid phone number!`,
